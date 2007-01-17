@@ -40,10 +40,13 @@ static int is_done(Node *n){
 
 static int cmp_todo (Node *a, Node *b)
 {
-	if (!(a->flags) && !(b->flags))
+	/*
+	 * This is nonsense. -lis
+	 * */
+	/*if (!(a->flags) && !(b->flags))
 		return (strcasecmp
 				(fixnullstring (node_get (a, TEXT)),
-				 fixnullstring (node_get (b, TEXT))));
+				 fixnullstring (node_get (b, TEXT))));*/
 
 	if (node_get(a,"done") && !node_get(b,"done"))
 		return 1;				/*  all todos at top */
