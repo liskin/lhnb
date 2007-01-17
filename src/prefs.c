@@ -84,7 +84,7 @@ void write_default_prefs ()
 	FILE *file;
 
 	file = fopen (prefs.rc_file, "w");
-	fprintf (file,
+	(fprintf) (file,
 #include "hnbrc.inc"
 		);
 	fclose (file);

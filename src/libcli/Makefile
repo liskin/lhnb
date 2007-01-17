@@ -7,8 +7,7 @@ all: libcli.a libcli.so test-static test-shared
 clean:
 	rm -f *.o *.a *.so test-s* *~
 libcli.a: $(OBJS)
-	ar rc libcli.a cli*.o
-	ranlib -s libcli.a
+	ar rcs libcli.a cli*.o
 libcli_p.a: 
 	$(CC) -pg -c cli.c
 	$(CC) -pg -c cli_history.c
