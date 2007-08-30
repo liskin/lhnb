@@ -395,10 +395,12 @@ char *tidy_keyname (const char *keyname)
 !init_ui_binding();
 */
 
+#if 0
 static void* dummy_cmd (int argc, char **argv, void *data)
 {
 	return data;
 }
+#endif
 
 void init_ui_binding ()
 {

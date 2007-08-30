@@ -89,7 +89,7 @@ void node_set (Node *node, char *name, char *data)
 	Node_AttItem *att;
 
 	if (node == NULL)
-		return NULL;
+		return;
 
 	att = node->attrib;
 	while (att) {
