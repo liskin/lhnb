@@ -142,48 +142,48 @@ void node_unset (Node *node, char *name)
 #include <stdio.h>
 
 
-int cmd_att_set (int argc, char **argv, void *data)
+void *cmd_att_set (int argc, char **argv, void *data)
 {
 	Node *pos = (Node *) data;
 
 	if(argc!=3){
 		cli_outfunf("usage: %s <attribute> <value>",argv[0]);
-		return (int) pos;
+		return pos;
 	}
 		
 	node_set (pos, argv[1], argv[2]);
-	return (int) pos;
+	return pos;
 }
 
-int cmd_att_get (int argc, char **argv, void *data)
+void *cmd_att_get (int argc, char **argv, void *data)
 {
 	Node *pos = (Node *) data;
 	char *cdata;
 	
 	if(argc!=2){
 		cli_outfunf("usage: %s <attribute>",argv[0]);
-		return (int) pos;
+		return pos;
 	}
 			
 	cdata = node_get (pos, argv[1]);
 
 	if (cdata)
 		cli_outfun (cdata);
-	return (int) pos;
+	return pos;
 }
 
-int cmd_att_clear (int argc, char **argv, void *data)
+void *cmd_att_clear (int argc, char **argv, void *data)
 {
 	Node *pos = (Node *) data;
 	if(argc!=2){
 		cli_outfunf("usage: %s <attribute>",argv[0]);
-		return (int) pos;
+		return pos;
 	}
 	node_unset (pos, argv[1]);
-	return (int) pos;
+	return pos;
 }
 
-int cmd_att_list (int argc,char **argv, void *data)
+void *cmd_att_list (int argc,char **argv, void *data)
 {
 	Node_AttItem *att;
 	Node *pos = (Node *) data;
@@ -193,7 +193,7 @@ int cmd_att_list (int argc,char **argv, void *data)
 		cli_outfunf ("%s: [%s]", att->name, att->data);
 		att = att->next;
 	}
-	return (int) pos;
+	return pos;
 }
 
 /*

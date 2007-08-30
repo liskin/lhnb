@@ -113,7 +113,7 @@ static  int item_matches (const char *itemname);
 
 typedef struct ItemT {
 	char *name;					/* what the user types */
-	int (*func) (int argc,char **argv, void *data);	/* function that is the command */
+	void* (*func) (int argc,char **argv, void *data);	/* function that is the command */
 	int *integer;				/* pointer to integer (set to NULL if string) */
 	char *string;				/* pointer to string (set to NULL if integer) */
 	char *usage;					/* helptext for this command */
@@ -130,7 +130,7 @@ static ItemT *items = NULL;
 void
 cli_add_item (char *name,
 		  int *integer, char *string,
-		  int (*func) (int argc,char **argv, void *data), char *usage)
+		  void* (*func) (int argc,char **argv, void *data), char *usage)
 {
 	ItemT *titem = items;
 
@@ -191,8 +191,8 @@ void cli_add_help(char *name, char *helptext){
 }
 
 
-static int help (int argc,char **argv, void *data);
-static int vars (int argc,char **argv, void *data);
+static void* help (int argc,char **argv, void *data);
+static void* vars (int argc,char **argv, void *data);
 
 static int inited = 0;
 
@@ -224,13 +224,13 @@ static void init_cli (void)
 
 int cli_calllevel=0;
 
-int cli_docmd (char *commandline, void *data)
+void *cli_docmd (char *commandline, void *data)
 {
 	int largc=0;
 	char **largv;
 	
 	ItemT *titem = items;
-	int ret=(int)data;
+	void *ret=data;
 	cli_calllevel++;
 
 	if (cli_precmd)
@@ -382,7 +382,7 @@ char *cli_complete (const char *commandline)
 
 /* internal commands */
 
-static int help (int argc,char **argv, void *data)
+static void* help (int argc,char **argv, void *data)
 {
 	if (argc == 1) {		/* show all help */
 		ItemT *titem = items;
@@ -410,17 +410,17 @@ static int help (int argc,char **argv, void *data)
 						cli_outfun ("");
 						cli_outfun(titem->help);
 					}
-					return(int)data;
+					return data;
 				}
 			}
 			titem = titem->next;
 		}
 		cli_outfunf ("unknown command '%s'", argv[1]);
 	}
-	return(int)data;	
+	return data;
 }
 
-static int vars (int argc, char **argv, void *data)
+static void* vars (int argc, char **argv, void *data)
 {
 	ItemT *titem = items;
 
@@ -446,7 +446,7 @@ static int vars (int argc, char **argv, void *data)
 
 	cli_outfunf ("----------------");
 	cli_outfunf ("to change a variable: \"variablename newvalue\"");
-	return(int)data;
+	return data;
 }
 
 char *cli_getstring(char *variable){

@@ -29,7 +29,7 @@
 
 static Node *clipboard = NULL;
 
-static int copy_cmd (int argc,char **argv, void *data)
+static void* copy_cmd (int argc,char **argv, void *data)
 {
 	Node *pos = (Node *) data;
 
@@ -39,15 +39,15 @@ static int copy_cmd (int argc,char **argv, void *data)
 	clipboard = node_new ();
 
 	clipboard = tree_duplicate (pos, clipboard);
-	return (int) pos;
+	return pos;
 }
 
-static int cut_cmd (int argc,char **argv, void *data)
+static void* cut_cmd (int argc,char **argv, void *data)
 {
 	Node *pos = (Node *) data;
 	if(prefs.readonly){
 		cli_outfun("readonly flag set, avoiding tree change");
-		return (int)data;
+		return data;
 	}
 
 	if (clipboard != NULL) {
@@ -58,10 +58,10 @@ static int cut_cmd (int argc,char **argv, void *data)
 	clipboard = tree_duplicate (pos, clipboard);
 	pos = node_remove (pos);
 	docmd(pos,"tree_changed");
-	return (int) pos;
+	return pos;
 }
 
-static int paste_cmd (int argc,char **argv, void *data)
+static void* paste_cmd (int argc,char **argv, void *data)
 {
 	Node *pos = (Node *) data;
 
@@ -71,14 +71,14 @@ static int paste_cmd (int argc,char **argv, void *data)
 		Node *temp;
 		if(prefs.readonly){
 			cli_outfun("readonly flag set, avoiding insertion");
-			return (int)data;
+			return data;
 		}
 
 		temp = node_insert_down (pos);
 		tree_duplicate (clipboard, temp);
 		docmd(pos,"tree_changed");
 	}
-	return (int) pos;
+	return pos;
 }
 
 /*

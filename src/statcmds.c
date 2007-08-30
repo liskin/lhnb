@@ -25,7 +25,7 @@
 
 #ifndef WIN32
 
-static int mem_cmd (int argc, char **argv, void *data)
+static void* mem_cmd (int argc, char **argv, void *data)
 {
 	Node *pos = (Node *) data;
 
@@ -35,7 +35,7 @@ static int mem_cmd (int argc, char **argv, void *data)
 
 		file = fopen ("/proc/self/stat", "r");
 		if (!file)
-			return (int) pos;
+			return pos;
 
 		fscanf (file,
 				"%*i %*s %*s %*i %*i %*i %*i %*i %*i %*i %*i %*i %*i %*i %*i %*i %*i %*i %*i %*i %*i %*i %i",
@@ -53,7 +53,7 @@ static int mem_cmd (int argc, char **argv, void *data)
 
 		file = fopen ("/proc/meminfo", "r");
 		if (!file)
-			return (int) pos;
+			return pos;
 
 		fscanf (file, "%*s %*s %*s %*s %*s %*s %*s %*i %*i %i %i %i",
 				&free, &buffers, &cached);
@@ -64,7 +64,7 @@ static int mem_cmd (int argc, char **argv, void *data)
 					 (float) ((free + buffers + cached) / 1024.0 / 1024.0));
 	}
 
-	return (int) pos;
+	return pos;
 }
 #endif
 /*
@@ -97,7 +97,7 @@ static int count_words (unsigned char *str)
 	return words;
 }
 
-static int stats_cmd (int argc, char **argv, void *data)
+static void* stats_cmd (int argc, char **argv, void *data)
 {
 	int words = 0, leaves = 0, nodes = 0;
 	Node *pos = (Node *) data;
@@ -114,7 +114,7 @@ static int stats_cmd (int argc, char **argv, void *data)
 
 	cli_outfunf ("nodes:%i, leaves:%i words:%i", nodes, leaves, words);
 
-	return (int) pos;
+	return pos;
 }
 
 /*

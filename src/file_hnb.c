@@ -105,7 +105,7 @@ static void hnb_export_nodes (FILE * file, Node *node, int level)
 	}
 }
 
-static int export_hnb (int argc, char **argv, void *data)
+static void* export_hnb (int argc, char **argv, void *data)
 {
 	Node *node = (Node *) data;
 	char *filename = argc>=2?argv[1]:"";
@@ -118,7 +118,7 @@ static int export_hnb (int argc, char **argv, void *data)
 
 	if (!file) {
 		cli_outfunf ("hnb export, unable to open \"%s\"", filename);
-		return (int) node;
+		return node;
 	}
 
 	fprintf (file, "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><?hnb pos=\"%s\"?>\n\
@@ -143,11 +143,11 @@ static int export_hnb (int argc, char **argv, void *data)
 
 	cli_outfunf ("hnb export, wrote data to \"%s\"", filename);
 
-	return (int) node;
+	return node;
 }
 
 
-static int import_hnb (int argc, char **argv, void *data)
+static void* import_hnb (int argc, char **argv, void *data)
 {
 	Node *node = (Node *) data;
 	char *filename = argc==2?argv[1]:"";
@@ -170,7 +170,7 @@ static int import_hnb (int argc, char **argv, void *data)
 	file = fopen (filename, "r");
 	if (!file) {
 		cli_outfunf ("hnb import, unable to open \"%s\"", filename);
-		return (int) node;
+		return node;
 	}
 	s = xml_tok_init (file);
 	init_import (&ist, node);
@@ -180,7 +180,7 @@ static int import_hnb (int argc, char **argv, void *data)
 			cli_outfunf ("hnb import error, parsing og '%s' line:%i, %s", filename,
 						 s->line_no, rdata);
 			fclose (file);
-			return (int) node;
+			return node;
 		}
 		if (in_tree) {
 			if (type == t_tag && !strcmp (rdata, "node")) {
@@ -263,7 +263,7 @@ static int import_hnb (int argc, char **argv, void *data)
 
 	xml_tok_cleanup (s);
 
-	return (int) node;
+	return node;
 }
 
 /*

@@ -27,7 +27,7 @@
 
 static char query[100];
 
-static int getquery_cmd (int argc, char **argv, void *data)
+static void* getquery_cmd (int argc, char **argv, void *data)
 {
 	Node *pos = (Node *) data;
 
@@ -36,7 +36,7 @@ static int getquery_cmd (int argc, char **argv, void *data)
 		ui_getstr (argv[1], &query[0]);
 	else
 		ui_getstr ("enter string", &query[0]);
-	return (int) pos;
+	return pos;
 }
 
 /*

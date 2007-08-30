@@ -42,7 +42,7 @@ static char *helpquote[]={
 
 /* *INDENT-ON* */
 
-static int export_help (int argc, char **argv, void *data)
+static void* export_help (int argc, char **argv, void *data)
 {
 	Node *node = (Node *) data;
 	char *filename = argc==2?argv[1]:"";
@@ -55,7 +55,7 @@ static int export_help (int argc, char **argv, void *data)
 	if (!file) {
 		cli_outfunf ("help export, unable to open \"%s\"", filename);
 
-		return (int) node;
+		return node;
 	}
 	startlevel = nodes_left (node);
 
@@ -86,10 +86,10 @@ static int export_help (int argc, char **argv, void *data)
 	fclose (file);
 
 	cli_outfunf ("help export, wrote data to \"%s\"", filename);
-	return (int) node;
+	return node;
 }
 
-static int import_help (int argc, char **argv, void *data)
+static void* import_help (int argc, char **argv, void *data)
 {
 	Node *node = (Node *) data;
 	import_state_t ist;
@@ -100,7 +100,7 @@ static int import_help (int argc, char **argv, void *data)
 	if (node_getflag (node, F_temp))
 		node = node_remove (node);
 
-	return (int) (node);
+	return node;
 }
 
 /*

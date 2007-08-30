@@ -109,10 +109,10 @@ static Node *menu_do(Node *pos){
 	return pos;
 }
 
-static int cmd_menu(int argc,char **argv,void *data){
+static void* cmd_menu(int argc,char **argv,void *data){
 	Node *pos=(Node *)data;
 	if(argc==1){ /* draw menu */
-		return (int)menu_do(pos);
+		return menu_do(pos);
 	} else if(argc==4){
 		char *submenu=argv[1];
 		char *label=argv[2];
@@ -142,7 +142,7 @@ static int cmd_menu(int argc,char **argv,void *data){
 		if(menu[col][row].width>menu[col][0].width)
 			menu[col][0].width=menu[col][row].width;	
 	}
-	return(int)pos;
+	return pos;
 }
 
 /*

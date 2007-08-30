@@ -36,7 +36,7 @@ static char *const mname[] = {
 	  "", "January", "February", "March", "April", "May" ,"June", "July",
 	  "August", "September", "October", "November" , "December"};
 
-static int insert_cal(int argc, char **argv, void *data){
+static void* insert_cal(int argc, char **argv, void *data){
 	Node *pos=(void *)data;
 
 	int year;
@@ -45,7 +45,7 @@ static int insert_cal(int argc, char **argv, void *data){
 	
 	if( (argc!=3) || (atoi(argv[1])>12 )){
 		cli_outfunf("usage: %s <month> <year>", argv[0]);
-		return (int)data;
+		return data;
 	}
 
 	month=atoi(argv[1]);
@@ -53,7 +53,7 @@ static int insert_cal(int argc, char **argv, void *data){
 
 	if(prefs.readonly){
 		cli_outfun("readonly flag set, avoiding insertion");
-		return (int)data;
+		return data;
 	}
 
 	
@@ -103,7 +103,7 @@ static int insert_cal(int argc, char **argv, void *data){
 	}	
 
 	docmd(pos,"tree_changed");
-	return (int)pos;
+	return pos;
 }
 
 /*

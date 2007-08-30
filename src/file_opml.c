@@ -90,7 +90,7 @@ static void opml_export_nodes (FILE * file, Node *node, int level)
 	}
 }
 
-static int export_opml (int argc, char **argv, void *data)
+static void* export_opml (int argc, char **argv, void *data)
 {
 	Node *node = (Node *) data;
 	char *filename = argc>=2?argv[1]:"";
@@ -103,7 +103,7 @@ static int export_opml (int argc, char **argv, void *data)
 
 	if (!file) {
 		cli_outfunf ("opml export, unable to open \"%s\"", filename);
-		return (int) node;
+		return node;
 	}
 
 	fprintf (file, "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><?pos=\"%s\"?>\n\
@@ -133,10 +133,10 @@ static int export_opml (int argc, char **argv, void *data)
 
 	cli_outfunf ("opml export, wrote data to \"%s\"", filename);
 
-	return (int) node;
+	return node;
 }
 
-static int import_opml (int argc, char **argv, void *data)
+static void* import_opml (int argc, char **argv, void *data)
 {
 	Node *node = (Node *) data;
 	char *filename = argc==2?argv[1]:"";
@@ -154,7 +154,7 @@ static int import_opml (int argc, char **argv, void *data)
 	file = fopen (filename, "r");
 	if (!file) {
 		cli_outfunf ("opml import, unable to open \"%s\"", filename);
-		return (int) node;
+		return node;
 	}
 	s = xml_tok_init (file);
 	init_import (&ist, node);
@@ -164,7 +164,7 @@ static int import_opml (int argc, char **argv, void *data)
 			cli_outfunf ("opml import error, parsing og '%s', line:%i %s", filename,
 						 s->line_no, rdata);
 			fclose (file);
-			return (int) node;
+			return node;
 		}
 		if (in_body) {
 			if (type == t_tag && !strcmp (rdata, "outline")) {
@@ -208,7 +208,7 @@ static int import_opml (int argc, char **argv, void *data)
 
 	cli_outfunf ("opml import - imported \"%s\" %i lines", filename, s->line_no);
 	xml_tok_cleanup (s);
-	return (int) node;
+	return node;
 }
 
 

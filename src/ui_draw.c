@@ -538,7 +538,7 @@ static struct {
 
 /* FIXME: make backup?,.. and make sure data is present,.., make possiblity to write back? */
 
-int display_format_cmd (int argc, char **argv, void *data)
+void* display_format_cmd (int argc, char **argv, void *data)
 {
 	char *p = argv[1];
 	int width;
@@ -546,7 +546,7 @@ int display_format_cmd (int argc, char **argv, void *data)
 	int col_no = 0;
 
 	if(argc<2){
-		return (int)data;
+		return data;
 	}
 
 	do {
@@ -631,7 +631,7 @@ int display_format_cmd (int argc, char **argv, void *data)
 
 	col_def[col_no].type = col_terminate;
 
-	return (int) data;
+	return data;
 }
 
 
@@ -793,7 +793,7 @@ void ui_draw (Node *node, char *input, int edit_mode)
 		line_nodeno[active_line] = node_no (node);
 
 		if (edit_mode) {
-			lines = draw_item (active_line, (int) input, node, drawmode_edit);
+			lines = draw_item (active_line, (int) (intptr_t) input, node, drawmode_edit);
 		} else {
 			lines =
 				draw_item (active_line, strlen (input), node,

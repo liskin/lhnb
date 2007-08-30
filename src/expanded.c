@@ -26,7 +26,7 @@
 #include "ctype.h"
 #include "ui_binding.h"
 
-static int cmd_expand (int argc,char **argv, void *data)
+static void* cmd_expand (int argc,char **argv, void *data)
 {
 	Node *pos = (Node *) data;
 	if(argc==1){
@@ -35,7 +35,7 @@ static int cmd_expand (int argc,char **argv, void *data)
 				inputbuf[strlen (inputbuf) + 1] = 0;
 				inputbuf[strlen (inputbuf)] = lastbinding->key;
 			}
-			return (int)pos;
+			return pos;
 		}
 		node_setflag(pos,F_expanded,1);
 	} else if((!strcmp(argv[1],"-a"))||(!strcmp(argv[1],"--all"))){
@@ -74,10 +74,10 @@ static int cmd_expand (int argc,char **argv, void *data)
 		}
 		cli_outfun ("expanded all nodes on branch");
 	}
-	return (int) pos;
+	return pos;
 }
 
-static int cmd_collapse (int argc,char **argv, void *data)
+static void* cmd_collapse (int argc,char **argv, void *data)
 {
 	Node *pos = (Node *) data;
 	if(argc==1){
@@ -86,7 +86,7 @@ static int cmd_collapse (int argc,char **argv, void *data)
 				inputbuf[strlen (inputbuf) + 1] = 0;
 				inputbuf[strlen (inputbuf)] = lastbinding->key;
 			}		
-			return (int)pos;
+			return pos;
 		}
 		node_setflag(pos,F_expanded,0);
 	} else if((!strcmp(argv[1],"-a"))||(!strcmp(argv[1],"--all"))){
@@ -110,7 +110,7 @@ static int cmd_collapse (int argc,char **argv, void *data)
 		cli_outfun ("collapsed subtree");
 	}
 	
-	return (int) pos;
+	return pos;
 }
 
 /*

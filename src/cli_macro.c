@@ -80,7 +80,7 @@ static Node *do_macro(MacroT *macro, Node *pos){
 	return pos;
 }
 
-static int cmd_macro (int argc, char **argv, void *data)
+static void* cmd_macro (int argc, char **argv, void *data)
 {
 	Node *pos=(Node *)data;
 	if(argc==1){
@@ -88,7 +88,7 @@ static int cmd_macro (int argc, char **argv, void *data)
 	} else if(argc==2){
 		MacroT *tmacro=lookup_macro(argv[1]);
 		if(tmacro){
-			return (int)do_macro(tmacro,pos);
+			return do_macro(tmacro,pos);
 		} else {
 			cli_outfunf("no such macro defined '%s'",argv[1]);
 		}
@@ -97,7 +97,7 @@ static int cmd_macro (int argc, char **argv, void *data)
 		if(!strcmp(argv[1],"define") ){
 			if(lookup_macro(argv[2])){
 				cli_outfunf("error macro %s already exist,.. this might turn out badly,.. " ,argv[2]);
-				return (int) pos;
+				return pos;
 			} else {
 				MacroT *tmacro;
 				if(!macro){
@@ -119,7 +119,7 @@ static int cmd_macro (int argc, char **argv, void *data)
 			
 		}
 	}
-	return (int) pos;
+	return pos;
 }
 
 

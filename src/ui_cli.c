@@ -49,14 +49,14 @@ static char *path_strip (char *path)
 	return path;
 }
 
-static int add (int argc,char **argv, void *data)
+static void* add (int argc, char **argv, void *data)
 {
 	Node *pos = (Node *) data;
 	Node *tnode;
 
 	if(argc==1){
 		cli_outfunf("usage: %s <new entry>",argv[0]);
-		return 0;
+		return pos;
 	}
 
 	if (argc==2) {
@@ -65,23 +65,23 @@ static int add (int argc,char **argv, void *data)
 
 	tnode = node_insert_down (node_bottom (pos));
 	node_set (tnode, TEXT, argv[1]);
-	return (int) pos;
+	return pos;
 }
 
-static int addc (int argc,char **argv, void *data)
+static void* addc (int argc, char **argv, void *data)
 {
 	Node *pos = (Node *) data;
 	Node *tnode;
 
 	if(argc==1){
 		cli_outfunf("usage: %s <entry> [new subentry]",argv[0]);
-		return 0;
+		return pos;
 	}
 
 	tnode = node_exact_match (argv[1], pos);
 	if (!tnode) {
 		cli_outfun ("specified parent not found");
-		return (int) pos;
+		return pos;
 	}
 
 	if (node_right (tnode)) {
@@ -95,30 +95,30 @@ static int addc (int argc,char **argv, void *data)
 	else
 		node_set (tnode, TEXT, argv[2]);
 
-	return (int) pos;
+	return pos;
 }
 
-static int pwd (int argc,char **argv, void *data)
+static void* pwd (int argc, char **argv, void *data)
 {
 	Node *pos = (Node *) data;
 
 	cli_outfun (path_strip (node2path (pos)));
 	cli_outfun ("\n");
-	return (int) pos;
+	return pos;
 }
 
-static int cd (int argc, char **argv, void *data)
+static void* cd (int argc, char **argv, void *data)
 {
 	Node *pos = (Node *) data;
 	Node *tnode = pos;
 
 	if(argc==1){
-		return (int)node_root(pos);
+		return node_root(pos);
 	}
 
 	if (!strcmp (argv[1], "..")){
 		if (node_left (tnode) != 0)
-			return (int) (node_left (tnode));
+			return node_left (tnode);
 	}
 		
 
@@ -128,11 +128,9 @@ static int cd (int argc, char **argv, void *data)
 	}
 	if (!tnode) {
 		cli_outfun ("no such node\n");
-		return (int) pos;
+		return pos;
 	}
-	return (int) tnode;
-
-	return (int) pos;
+	return tnode;
 }
 
 #include <ctype.h>
@@ -151,7 +149,7 @@ static void pre_command (char *commandline)
 	}
 }
 
-static int ls (int argc, char **argv, void *data)
+static void* ls (int argc, char **argv, void *data)
 {
 	Node *pos = (Node *) data;
 
@@ -188,7 +186,7 @@ static int ls (int argc, char **argv, void *data)
 			tnode = node_down (tnode);
 		}
 	}
-	return (int) pos;
+	return pos;
 }
 
 /*
@@ -216,12 +214,12 @@ void init_ui_cli (void)
 
 Node *docmd (Node *pos, const char *commandline)
 {
-	int ret;
+	Node *ret;
 	char *cmdline = strdup (commandline);
 
 	ret = cli_docmd (cmdline, pos);
 	free (cmdline);
-	return (Node *) ret;
+	return ret;
 }
 
 Node *docmdf (Node *pos,char *format, ...){

@@ -147,7 +147,7 @@ static void xml_export_nodes (FILE * file, Node *node, int level)
 	}
 }
 
-static int export_xml (int argc, char **argv, void *data)
+static void* export_xml (int argc, char **argv, void *data)
 {
 	Node *node = (Node *) data;
 	char *filename = argc==2?argv[1]:"";
@@ -159,7 +159,7 @@ static int export_xml (int argc, char **argv, void *data)
 		file = fopen (filename, "w");
 	if (!file) {
 		cli_outfunf ("xml export, unable to open \"%s\"", filename);
-		return (int) node;
+		return node;
 	}
 
 	xml_export_nodes (file, node, 0);
@@ -170,7 +170,7 @@ static int export_xml (int argc, char **argv, void *data)
 	cli_outfunf ("xml export, wrote data to \"%s\"", filename);
 
 
-	return (int) node;
+	return node;
 }
 
 /* joins up tags with data if there is data as the first child
@@ -202,7 +202,7 @@ static Node *xml_cuddle_nodes (Node *node)
 }
 
 
-static int import_xml (int argc, char **argv, void *data)
+static void* import_xml (int argc, char **argv, void *data)
 {
 	Node *node = (Node *) data;
 	char *filename = argc==2?argv[1]:"";
@@ -221,7 +221,7 @@ static int import_xml (int argc, char **argv, void *data)
 	file = fopen (filename, "r");
 	if (!file) {
 		cli_outfunf ("xml import, unable to open \"%s\"", filename);
-		return (int) node;
+		return node;
 	}
 	s = xml_tok_init (file);
 	init_import (&ist, node);
@@ -231,7 +231,7 @@ static int import_xml (int argc, char **argv, void *data)
 			cli_outfunf ("xml import error, parsing og '%s', line:%i %s", filename,
 						 s->line_no,rdata);
 			fclose (file);
-			return (int) node;
+			return node;
 		}
 
 		switch (type) {
@@ -328,7 +328,7 @@ static int import_xml (int argc, char **argv, void *data)
 
 	cli_outfunf ("xml import - imported \"%s\" %i lines", filename, s->line_no);
 	xml_tok_cleanup (s);
-	return (int) node;
+	return node;
 }
 
 /*

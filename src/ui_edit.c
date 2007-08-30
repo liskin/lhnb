@@ -20,6 +20,7 @@
 
 #include <ctype.h>
 #include <string.h>
+#include <unistd.h>
 
 #include "tree.h"
 #include "ui.h"
@@ -28,7 +29,7 @@
 #include "evilloop.h"
 #include <stdlib.h>
 
-static int ui_edit_cmd (int argc, char **argv, void *data)
+static void* ui_edit_cmd (int argc, char **argv, void *data)
 {
 	Tbinding *c;
 	int stop = 0;
@@ -48,7 +49,7 @@ static int ui_edit_cmd (int argc, char **argv, void *data)
 	if(prefs.readonly){
 		cli_outfun("readonly flag set, avoiding tree change");
 		ui_current_scope = tempscope;
-		return (int)data;
+		return data;
 	}
 
 	if (inputbuf[0]) {			/* there is data in the inputbuffer,.. 
@@ -67,7 +68,7 @@ static int ui_edit_cmd (int argc, char **argv, void *data)
 		}
 		ui_current_scope = tempscope;
 		docmd(pos,"tree_changed");
-		return (int) pos;
+		return pos;
 	}
 
 	node_backup = node_duplicate (pos);
@@ -81,7 +82,7 @@ static int ui_edit_cmd (int argc, char **argv, void *data)
 
 	while (!stop) {
 		node_set (pos, TEXT, input);
-		ui_draw (pos, (char *) cursor_pos, 1);
+		ui_draw (pos, (char *) (intptr_t) cursor_pos, 1);
 		c = parsekey (ui_input (), ui_scope_nodeedit);
 		switch (c->action) {
 			case ui_action_right:
@@ -215,7 +216,7 @@ static int ui_edit_cmd (int argc, char **argv, void *data)
 	}
 	node_free (node_backup);
 	ui_current_scope = tempscope;
-	return (int) data;
+	return data;
 }
 
 int ui_getstr_loc (char *input, int x, int y, int maxlen)

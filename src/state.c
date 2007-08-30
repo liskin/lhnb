@@ -29,7 +29,7 @@
 
 static Node *savedtree = NULL;
 
-static int save_state_cmd (int argc, char **argv, void *data)
+static void* save_state_cmd (int argc, char **argv, void *data)
 {
 	Node *pos = (Node *) data;
 	Node *i;
@@ -58,10 +58,10 @@ static int save_state_cmd (int argc, char **argv, void *data)
 			savedtree = node_recurse (savedtree);
 	}
 
-	return (int) pos;
+	return pos;
 }
 
-static int restore_state_cmd (int argc, char **argv, void *data)
+static void* restore_state_cmd (int argc, char **argv, void *data)
 {
 	Node *pos = (Node *) data;
 
@@ -74,7 +74,7 @@ static int restore_state_cmd (int argc, char **argv, void *data)
 		tree_free (savedtree);
 		savedtree = NULL;
 	}
-	return (int) pos;
+	return pos;
 }
 
 /*

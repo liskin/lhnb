@@ -60,7 +60,7 @@ static void ps_export_node (FILE * file, int level, int flags, char *data)
 	free(quoted);
 }
 
-static int export_ps (int argc, char **argv, void *data)
+static void* export_ps (int argc, char **argv, void *data)
 {
 	Node *node = (Node *) data;
 	char *filename = argc==2?argv[1]:"";
@@ -75,7 +75,7 @@ static int export_ps (int argc, char **argv, void *data)
 		file = fopen (filename, "w");
 	if (!file) {
 		cli_outfunf ("postscript export, unable to open \"%s\"", filename);
-		return (int) node;
+		return node;
 	}
 	startlevel = nodes_left (node);
 
@@ -225,7 +225,7 @@ close\n\
 	cli_outfunf ("postscript export, saved output to \"%s\"", filename);
 	if (file != stdout)
 		fclose (file);
-	return (int) node;
+	return node;
 }
 
 /*
