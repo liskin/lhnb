@@ -36,3 +36,5 @@ hnb2:
 	cc -o hnb -lncurses -I.. -DHAVE_CONFIG_H -Ilibcli libcli/cli.c libcli/cli_history.c *.c -Wall
 hnb3:
 	/path/to/cross-compiler/cc -o hnb /usr/local/cross-tools/i386-mingw32msvc/lib/pdcurses.a libcli/libcli.a -I.. -DHAVE_CONFIG_H -Ilibcli libcli/cli.c libcli/cli_history.c *.c -Wall
+
+prefs.o: hnbrc.inc
