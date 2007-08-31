@@ -283,7 +283,7 @@ static void* toggle_done_cmd (int argc, char **argv, void *data)
 		return pos;
 	}
 
-	if (!strcmp(fixnullstring(node_get(pos,"done")),"yes")) {	/* bail out if not todo info set */
+	if (!strcmp(fixnullstring(node_get(pos,"done")),"yes")) {	/* toggle done info */
 		node_set(pos,"done","no");
 	} else {
 		node_set(pos,"done","yes");
