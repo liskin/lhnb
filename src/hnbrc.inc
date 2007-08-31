@@ -113,6 +113,11 @@
 		# it fakes it with a XML comment) 1=true 0=false\n\
 		savepos	\"1\"\n\
 		\n\
+	##### Remember expansions in tree\n\
+		# wheter hnb remembers the expansion states in a file, (currently\n\
+		# supported by the hnb DTD only) 1=true 0=false\n\
+		saveexpand \"1\"\n\
+		\n\
 	##### XML format\n\
 		##### XML Cuddling\n\
 			# When loading xml files, should data be allowed on \n\

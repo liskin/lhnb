@@ -15,6 +15,7 @@ typedef struct {
 	int showpercent;
 	int fixedfocus;
 	int savepos;
+	int saveexpand;
 	int readonly;
 } Tprefs;
 

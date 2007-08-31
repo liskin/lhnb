@@ -83,6 +83,9 @@ static void hnb_export_nodes (FILE * file, Node *node, int level)
 		 }		 
 		}
 
+		if (node_getflag(node,F_expanded))
+			fprintf (file, " expanded=\"yes\"");
+
 
 		fprintf (file, ">");
 
@@ -130,6 +133,7 @@ static void* export_hnb (int argc, char **argv, void *data)
 	<!ELEMENT node (data?,node*)>\n\
 	<!ATTLIST node done (yes|no) #IMPLIED\n\
 	          type CDATA #IMPLIED\n\
+	          expanded (yes|no) #IMPLIED\n\
 	>]>\n\
 \n\
 <tree>", (argc==3)?argv[2]:"",
@@ -193,10 +197,17 @@ static void* import_hnb (int argc, char **argv, void *data)
 				char *att_name=strdup(rdata);
 				if(xml_tok_get(s,&rdata)!=t_val){
 					cli_outfun("import_hnb,.. hmpf....");
-				};
-				{char *unquoted=string_replace(rdata,xmlunquote);
-				node_set(tempnode,att_name,unquoted);
-				free(unquoted);
+				}
+
+				{
+					char *unquoted=string_replace(rdata,xmlunquote);
+					if (!strcmp(att_name,"expanded")) {
+						if (prefs.saveexpand)
+							node_setflag(tempnode,F_expanded,strcmp(unquoted,"yes")?0:1);
+					} else {
+						node_set(tempnode,att_name,unquoted);
+					}
+					free(unquoted);
 				}
 
 				if(!strcmp(att_name,"done")){ /* to make older files conform */
