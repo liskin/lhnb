@@ -167,6 +167,7 @@ static int draw_textblock (int line_start, int col_start, int width,
 			case '\t':
 			case '\n':
 			case '\r':			/* all whitespace is treated as spaces */
+			wordwrap:
 				if (col + wpos + 1 >= col_end) {	/* reached margin */
 					if (drawmode == drawmode_edit) {
 						if (cursor_state == 0)
@@ -236,10 +237,12 @@ static int draw_textblock (int line_start, int col_start, int width,
 				word[wpos = 0] = 0;
 				break;
 			default:
-				if (wpos < 198) {
-					word[wpos++] = data[dpos];
-					word[wpos] = 0;
-				}
+				if (col_start + wpos + 2 >= col_end)
+					goto wordwrap;
+
+				word[wpos++] = data[dpos];
+				word[wpos] = 0;
+
 				break;
 		}
 		dpos++;
