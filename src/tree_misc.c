@@ -84,7 +84,8 @@ static void* cmd_go(int argc, char **argv, void *data){
 	Node *pos=(Node *)data;
 	
 	if(argc!=2){
-		cli_outfunf("usage: %s <up|down|left|right|recurse|backrecurse|root|top|bottom>");
+		cli_outfunf("usage: %s <up|down|left|right|recurse[-visible]"
+				"|backrecurse[-visible]|root|top|bottom>");
 		return pos;
 	}
 	
@@ -106,6 +107,12 @@ static void* cmd_go(int argc, char **argv, void *data){
 	} else if(!strcmp(argv[1],"backrecurse")){
 		if(node_backrecurse(pos))
 			pos=node_backrecurse(pos);
+	} else if(!strcmp(argv[1],"recurse-visible")){
+		if(node_recurse_visible(pos))
+			pos=node_recurse_visible(pos);
+	} else if(!strcmp(argv[1],"backrecurse-visible")){
+		if(node_backrecurse_visible(pos))
+			pos=node_backrecurse_visible(pos);
 	} else if(!strcmp(argv[1],"root")){
 		pos=node_root(pos);
 	} else if(!strcmp(argv[1],"top")){

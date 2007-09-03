@@ -124,6 +124,7 @@ void node_swap (Node *nodeA, Node *nodeB);
 	Returns: next recursive node or 0 if none
 */
 Node *node_recurse (Node *node);
+Node *node_recurse_visible (Node *node);
 
 /* function to traverse a subtree */
 Node *node_traverse_right_of (Node *stop, Node *node);
@@ -133,6 +134,7 @@ Node *node_traverse_right_of (Node *stop, Node *node);
 	Returns: next back recursive node or 0 if none
 */
 Node *node_backrecurse (Node *node);
+Node *node_backrecurse_visible (Node *node);
 
 /* returns the number of this node in the database 
 */
