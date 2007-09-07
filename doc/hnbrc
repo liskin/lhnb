@@ -113,6 +113,11 @@
 		# it fakes it with a XML comment) 1=true 0=false
 		savepos	"1"
 		
+	##### Remember expansions in tree
+		# wheter hnb remembers the expansion states in a file, (currently
+		# supported by the hnb DTD only) 1=true 0=false
+		saveexpand "1"
+		
 	##### XML format
 		##### XML Cuddling
 			# When loading xml files, should data be allowed on 
@@ -248,6 +253,8 @@
 		
 		bind + expand
 		bind - collapse
+		bind ] "expand --subtree"
+		bind [ "collapse --subtree"
 		
 		bind ^Z restore_state
 		
@@ -556,8 +563,10 @@
 		menu "Entry" "outdent     <" "outdent"
 		menu "Entry" "toggle todo ^T" "toggle_todo"
 		menu "Entry" "toggle done ^D" "toggle_done"
-		menu "Entry" "expand      +" "expand"
-		menu "Entry" "collapse    -" "collapse"
+		menu "Entry" "expand           +" "expand"
+		menu "Entry" "expand subtree   ]" "expand --subtree"
+		menu "Entry" "collapse         -" "collapse"
+		menu "Entry" "collapse subtree [" "collapse --subtree"
 	##### level
 		menu "Level" "------------" ""
 		menu "Level" "sort      ^S" "sort -a"
