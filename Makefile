@@ -19,9 +19,9 @@ src/hnbrc.inc: doc/hnbrc
 	echo "\"">>src/hnbrc.inc
 
 tar: updaterc clean hnb.spec config.h
-	(cd ..;mkdir hnb-`cat hnb/VERSION`)
-	(cd ..;cp -r hnb/* hnb-`cat hnb/VERSION`; tar cvzf hnb-`cat hnb/VERSION`.tar.gz hnb-`cat hnb/VERSION`)
-	rm -rf ../hnb-`cat VERSION`
+	(cd ..;mkdir lhnb-`cat lhnb/VERSION`)
+	(cd ..;cp -r lhnb/* lhnb-`cat lhnb/VERSION`; tar cvzfl lhnb-`cat lhnb/VERSION`.tar.gz lhnb-`cat lhnb/VERSION`)
+	rm -rf ../lhnb-`cat VERSION`
 
 config.h: VERSION
 	cp config.h config.h.tmp

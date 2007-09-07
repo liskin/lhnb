@@ -577,6 +577,7 @@
 	macro define m_about\n\
 		status \"hnb - hierarchical notebook   http://hnb.sourceforge.net/\"\n\
 		status \"(c) Øyvind Kolås 2001-2003    pippin@users.sourceforge.net\"\n\
+		status \"(this is lhnb, hnb's continuation by Tomas Janousek)\"\n\
 	end\n\
 	\n\
 	macro m_about\n\

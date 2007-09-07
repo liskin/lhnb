@@ -577,6 +577,7 @@
 	macro define m_about
 		status "hnb - hierarchical notebook   http://hnb.sourceforge.net/"
 		status "(c) Øyvind Kolås 2001-2003    pippin@users.sourceforge.net"
+		status "(this is lhnb, hnb's continuation by Tomas Janousek)"
 	end
 	
 	macro m_about

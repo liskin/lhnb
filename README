@@ -6,6 +6,10 @@ HIERARCHICAL NOTEBOOK
 	random notes, and probably many more I  haven't thought of yet..
 	
 
+HOW TO GET lhnb?
+	http://nomi.cz/download/releases/lhnb/
+	http://git.nomi.cz/?p=tomi/lhnb;a=summary
+
 HOW TO GET hnb?
 	new releases and information about hnb will appear at hnb's home page
 	
@@ -43,6 +47,15 @@ USAGE DOCUMENTATION
 	database.
 	
 CHANGELOG
+	1.9.19
+		new maintainer -- Tomas Janousek
+		merged compile fixes from Fedora package
+		merged a few things from Debian package (James Morrison)
+			x86_64 fixes and todo in ps output
+		fixed sorting of todo nodes
+		added node expansion saving
+		added overlong word wrapping
+		added more intuitive node walking (go {,back}recurse-visible)
 	1.9.18
 		fixed segfault reported by thomas sattler, due to faulty handling of NULL input in node_get
 		fixed segfault occuring when selecting the first menu item directly
@@ -253,7 +266,9 @@ CHANGELOG
 AUTHORS
 	hnb authors
 	
-	�yvind Kol�s       <pippin@users.sourceforge.net>
+	Øyvind Kolås       <pippin@users.sourceforge.net>
+		project maintainer
+	Tomáš Janoušek     <tomi@nomi.cz>
 		project maintainer
 	Andras BALI        <drewie@bigfoot.com>
 		Debian Package

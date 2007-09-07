@@ -53,6 +53,7 @@ static void usage (const char *av0)
 			 av0);
 	fprintf (stderr, "\n\
 Hierarchical NoteBook by Øyvind Kolås <pippin@users.sourceforge.net>\n\
+(this is lhnb, hnb's continuation by Tomas Janousek)\n\
 It is distributed under the GNU General Public License\n\
 \n\
 default database: '%s'\n", prefs.default_db_file);
