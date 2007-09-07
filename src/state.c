@@ -84,8 +84,9 @@ void init_keepstate ()
 {
 	cli_add_command ("save_state", save_state_cmd, "");
 	cli_add_help ("save_state",
-				  "Saves a copy of the current tree and selected node in memory");
+		      "Saves a copy of the current tree and selected node in "
+		      "memory");
 	cli_add_command ("restore_state", restore_state_cmd, "");
 	cli_add_help ("restore_state",
-				  "Restores the copy of the tree saved with save_state");
+		      "Restores the copy of the tree saved with save_state");
 }

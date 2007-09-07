@@ -102,7 +102,10 @@ void init_spell ()
 {
 	cli_add_command ("spell", spell_cmd, "[-r]");
 	cli_add_help ("spell",
-				  "Spellchecks the current node, or all children and following siblings recursively (if -r specified), using the command defined in 'spell_command'");
+		      "Spellchecks the current node, or all children and "
+		      "following siblings recursively (if -r specified), "
+		      "using the command defined in 'spell_command'");
 	cli_add_string ("spell_command", spell_command,
-					"Command executed when spell checking a node, a temporary file is written and passed as an argument");
+			"Command executed when spell checking a node, a "
+			"temporary file is written and passed as an argument");
 }

@@ -40,9 +40,7 @@ static int is_done(Node *n){
 
 static int cmp_todo (Node *a, Node *b)
 {
-	/*
-	 * This is nonsense. -lis
-	 * */
+	/* This is nonsense. -lis */
 	/*if (!(a->flags) && !(b->flags))
 		return (strcasecmp
 				(fixnullstring (node_get (a, TEXT)),

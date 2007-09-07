@@ -46,18 +46,17 @@ static void* cmd_expand (int argc,char **argv, void *data)
 			tnode = node_recurse (tnode);
 		}
 		cli_outfun ("expanded all nodes");
-    } else if(!strcmp(argv[1],"--subtree")) {
-        node_setflag(pos,F_expanded,1);
+	} else if(!strcmp(argv[1],"--subtree")) {
+		node_setflag(pos,F_expanded,1);
 		if(node_right(pos)) {
-		  Node *tnode = node_right(pos);
+			Node *tnode = node_right(pos);
 
-		  while (tnode) {
-		    node_setflag(tnode,F_expanded,1);
-		    tnode = node_traverse_right_of (pos, tnode);
-		  }
+			while (tnode) {
+				node_setflag(tnode,F_expanded,1);
+				tnode = node_traverse_right_of (pos, tnode);
+			}
 		}
 		cli_outfun ("expanded subtree");
-
 	} else if((!strcmp(argv[1],"-h"))||(!strcmp(argv[1],"--here"))){
 		Node *tnode = node_right(pos);
 		int lvl = nodes_left(pos);
