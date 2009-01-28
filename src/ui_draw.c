@@ -207,8 +207,12 @@ static int draw_textblock (int line_start, int col_start, int width,
 							addstr ((char *) word);
 
 						}
-						if (data[dpos])
-							addch (' ');
+						if (data[dpos]) {
+							if (isspace(data[dpos]))
+								addch (' ');
+							else
+								addch (data[dpos]);
+						}
 					}
 				}
 
