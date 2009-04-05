@@ -240,7 +240,7 @@ int main (int argc, char **argv)
 	   	  stat(prefs.db_file, &statbuf);
 		  file_modified=statbuf.st_ctime;
 		  
-		  sprintf(recovery_file, "%s_hnb_rescue", prefs.db_file);
+		  sprintf(recovery_file, "%s~", prefs.db_file);
 		  tfile = fopen(recovery_file, "r");
 		  if(tfile){
 			  char response[1024]="_";
@@ -315,7 +315,7 @@ o)pen read_only\n\
 		{
 			char buf[4096];
 			if(recover)
-			sprintf (buf, "import_binary %s", file_to_load);
+			sprintf (buf, "import_hnb %s", file_to_load);
 			else
 			sprintf (buf, "import_%s %s", prefs.format,  file_to_load);
 

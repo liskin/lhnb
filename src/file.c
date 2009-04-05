@@ -164,7 +164,7 @@ static void* cmd_save (int argc,char **argv, void *data)
 			char buf[4096];
 			char swapfile[4096];
 
-			sprintf(swapfile,"%s_hnb_rescue",prefs.db_file);
+			sprintf(swapfile,"%s~",prefs.db_file);
 			/* remove(swapfile); when not removing it works as a lockfile */
 			docmd (pos, "autosave_threshold_nodes_changed 0");
 
