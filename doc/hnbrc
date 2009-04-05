@@ -1,69 +1,117 @@
-# configuration file for hnb,
+# configuration file for hnb
 #
-# use a tab-spacing of 4 when editing this file, or edit it thorugh
-# hnb with "hnb -a ~/.hnbrc" to take advantage of the indentation in it
+# Use tabs when editing this file, or edit it through hnb with
+# "hnb -a ~/.hnbrc" to take advantage of the indentation in it.
 #
-# (please be aware that this is the configuration file for a development version,
-#  things might change drastically soon,.. or perhaps later)
+# There are some macros which change e.g. the keybindings or look of hnb.
+# Search for "configuration macro" in this file to find more out about them.
+# Please note that these macros must be run after they have been defined.
+#
 
-##### bullets
-	# what kind of bullets are displayed before each item
-	##### samples
-		#bullet_parent          "  -"
-		#bullet_parent          "  *"
-		#bullet_parent          "  ·"
-		#bullet_parent_expanded "  +"
-		#bullet_parent_expanded "  *"
-		#bullet_parent_expanded "  ·"
-		#bullet_leaf            "  *"
-		#bullet_leaf            "  -"
-		#bullet_todo_leaf_undone   "[ ]"
-		#bullet_todo_leaf_done     "[X]"
-		#bullet_todo_parent_undone "[ ]"
-		#bullet_todo_parent_done   "[X]"
-		#bullet_todo_parent_undone "[ >"
-		#bullet_todo_parent_done   "[X>"
-	bullet_leaf            "  ·"
-	bullet_parent          "  +"
-	bullet_parent_expanded "  -"
-	bullet_todo_leaf_undone   "[ ]"
-	bullet_todo_leaf_done     "[X]"
-	bullet_todo_parent_undone "[ ]"
-	bullet_todo_parent_done   "[X]"
-	
 ##### user interface
-	##### display format
-		# defining how each node is displayed, the display string syntax is
-		# interpreted as follows:
+	##### display format / bullets
 		#
-		#   spaces turn into real spaces, i means indentation, - means bullet,
-		#   d means the real data of the node, x is a temporary placeholder for
-		#   upcoming column-types,. (for debugging only)
+		# display_format:
 		#
-		#   i and x can take an argument specifying how many characters wide
-		#   the field should be
+		# Defining how each node is displayed, the display string
+		# syntax is interpreted as follows:
 		#
-		#   until further features are added, only the multiplier after
-		#   indentation actually does something
-		#   # indicates node number (actually line number when used as a folding editor)
+		#   - Spaces turn into real spaces, i means indentation, -
+		#     means bullet, d means the real data of the node, x is
+		#     a temporary placeholder for upcoming column-types (for
+		#     debugging only).
+		#
+		#   - i and x can take an argument specifying how many
+		#     characters wide the field should be.
+		#
+		#   - Until further features are added, only the multiplier
+		#     after indentation actually does something. # indicates
+		#     the node number (actually line number when used as a
+		#     folding editor).
+		#
+		# bullets:
+		#
+		#   What kind of bullets are displayed before each item,
+		#   possible items and their default values are:
+		#
+		#   - bullet_leaf               "  -"
+		#   - bullet_parent             "  +"
+		#   - bullet_parent_expanded    "  *"
+		#   - bullet_todo_parent_undone "[ ]"
+		#   - bullet_todo_parent_done   "[X]"
+		#   - bullet_todo_leaf_undone   "[ ]"
+		#   - bullet_todo_leaf_done     "[X]"
+		#
 		##### samples
-			#display_format # "i4- d"
-		display_format "i4- d"
+			#display_format "i4- d"
+			#display_format "i2-d"
+			#display_format "# i4- d"
+			#display_format "#i2-d"
+			#
+			#bullet_parent          "  +"
+			#bullet_parent          "  *"
+			#bullet_parent          "  ·"
+			#bullet_parent_expanded "  *"
+			#bullet_parent_expanded "  +"
+			#bullet_parent_expanded "  ·"
+			#bullet_leaf            "  -"
+			#bullet_leaf            "  *"
+		macro define bullets_standard
+			
+			display_format "i4- d"
+			
+			bullet_leaf               "  -"
+			bullet_parent             "  +"
+			bullet_parent_expanded    "  *"
+			bullet_todo_parent_undone "[ ]"
+			bullet_todo_parent_done   "[X]"
+			bullet_todo_leaf_undone   "[_]"
+			bullet_todo_leaf_done     "[X]"
+			
+			end
+			
+		macro define bullets_alternate
+			
+			display_format "i2-d"
+			
+			bullet_leaf               " -"
+			bullet_parent             " +"
+			bullet_parent_expanded    " *"
+			bullet_todo_parent_undone " !"
+			bullet_todo_parent_done   " X"
+			bullet_todo_leaf_undone   " !"
+			bullet_todo_leaf_done     " X"
+			
+			end
+		
+		##### configuration macro (bullets):
+		#
+		# To switch to the alternative bullet scheme enable
+		# "bullet_alternate" and disable "bullet_standard".
+		#
+		macro bullets_standard
+		#macro bullets_alternate
 		
 	##### fixed focus
-		# lock the selection bar to a position 1/3 down the screen
+		#
+		# Lock the selection bar to a position 1/3 down the screen.
+		#
+		# 1=true, 0=false.
+		#
 		fixedfocus "0"
 		
-	
 ##### external commands
 	##### http:// handler
-		# what command is executed when a user wants a action performed on a
-		# entry containing an URL
-		# 
+		#
+		# What command is executed when a user wants a action performed
+		# on a entry containing an URL.
+		#
 		# * is substituted for the URL
 		#
-		# the X ones have their error and standard output redirected to dev/null
-		# and are put into the background to keep hnb running afterwards
+		# The X ones have their error and standard output redirected to
+		# dev/null and are put into the background to keep hnb running
+		# afterwards.
+		#
 		##### samples
 			#web_command "opera -remote 'openURL(*)'			> /dev/null 2>&1 &"
 			#web_command "netscape -remote 'openURL(*)'		> /dev/null 2>&1 &"
@@ -72,27 +120,29 @@
 			#web_command "mozilla -remote 'openURL(*,new-window)'	> /dev/null 2>&1 &"
 			#web_command "konqueror *				> /dev/null 2>&1 &"
 			#web_command "galeon -n					> /dev/null 2>&1 &"
-			web_command "w3m *"
 			#web_command "lynx *"
 			#web_commend "rxvt -fn fixed -rv +sb -e w3m *		> /dev/null 2>&1 &"
 			#web_command "opera -remote 'openURL(*,new-window)'	> /dev/null 2>&1 &"
+		web_command "w3m *"
 		
 	##### mail@handler
-		# what command is executed when a user wants a action performed on a
-		# entry containing a mail-address
-		# 
+		#
+		# What command is executed when a user wants a action performed
+		# on a entry containing a mail-address.
+		#
 		# * is substituted for the mail-address
 		#
-		## samples
+		##### samples
 			#mail_command "xterm -rv pine *				> /dev/null 2>&1 &"
 			#mail_command "xterm -rv +sb -e mutt *			> /dev/null 2>&1 &"
 			#mail_command "pine *"
 		mail_command "mutt *"
 		
 	##### spell checking
-		# the spell-checker used
 		#
-		## samples
+		# The spell-checker used.
+		#
+		##### samples
 			#spell_command "aspell -c"
 			#spell_command "ispell -x"
 			#spell_command "ispell -x -damerican"
@@ -101,16 +151,21 @@
 			#spell_command "ispell -x -dnynorsk"
 		spell_command "ispell -x"
 		
-	
 ##### file formats
 	##### Default Format
+		#
 		# hnb, opml, xml, ascii  are possible choices
+		#
 		format "hnb"
 		
 	##### Remember current position in tree
-		# wheter hnb remembers the current position in a file, (currently
-		# supported by the hnb DTD only, but might easily be extended since
-		# it fakes it with a XML comment) 1=true 0=false
+		#
+		# Whether hnb remembers the current position in a file
+		# (currently supported by the hnb DTD only, but might easily
+		# be extended since it fakes it with a XML comment).
+		#
+		# 1=true, 0=false.
+		#
 		savepos	"1"
 		
 	##### Remember expansions in tree
@@ -120,27 +175,39 @@
 		
 	##### XML format
 		##### XML Cuddling
-			# When loading xml files, should data be allowed on 
+			#
+			# When loading xml files, should data be allowed on
 			# the same line as tags?
+			#
 			xml_cuddle "0"
+			
 	##### Autosave
-		# when nodes_changed reaches above threshold, invoke autosave
+		#
+		# When nodes_changed reaches above threshold, invoke
+		# autosave.
+		#
 		autosave_threshold "15"
 		autosave_threshold_nodes_changed "0"
-	
-		# if change has occured but is less than threshold, save when number
-		# of "ticks"/keypresses, invoke autosave
+		
+		#
+		# If change has occurred but is less than threshold, save when
+		# number of "ticks"/keypresses, invoke autosave.
+		#
 		autosave_timeout    "50"
 		autosave_timer     "0"
-			
 		
-	
 ##### Color/style
-	# color scheme configuration, syntax is:
+	#
+	# Color scheme configuration, syntax is:
+	#
 	# "style <item>  <foreground/background> <attribute,[attribute]>"
-	# legal items are shown below
-	# colors are: blue, cyan, green, red, magenta, yellow, black and white
-	# attributes are: normal, reverse, bold, underline
+	#
+	# Legal items are shown below.
+	#
+	# Colors are: blue, cyan, green, red, magenta, yellow, black and white.
+	#
+	# Attributes are: normal, reverse, bold and underline.
+	#
 	
 	macro define 'style_standard'	
 		style menuitem       default/default reverse
@@ -153,8 +220,8 @@
 		style background     default/default normal
 		end
 	macro define 'style_alternate'	
-		style menuitem       red/white normal
-		style menutext       black/white    normal
+		style menuitem       red/default     normal
+		style menutext       default/default normal
 		style parentnode     default/default bold
 		style node           default/default normal
 		style bullet         yellow/default    normal
@@ -163,14 +230,21 @@
 		style background     default/default normal
 		end
 	
+	##### configuration macro (color scheme):
+	#
+	# To switch to the alternative color scheme enable
+	# "style_alternate" and disable "style_standard".
+	#
 	macro style_standard
+	#macro style_alternate
+	
 ##### key-bindings
 	#
-	# syntax: 
+	# Syntax:
 	#   "bind <scope[,scope[...]]>  <key>   <action>"
 	#
-	# multiple actions can be chained together by using the virtual key ".."
-	# as the following key-binding
+	# Multiple actions can be chained together by using the virtual key
+	# ".." as the following key-binding.
 	#
 	##################################################
 	
@@ -212,7 +286,9 @@
 		bind ^A 'action'
 		bind up    up
 		bind down  down
-		bind left  left
+		bind left  right
+		bind ..    left
+		bind ..    left
 		bind right right
 		bind npage pagedown
 		bind ppage pageup
@@ -258,12 +334,71 @@
 		
 		bind ^Z restore_state
 		
+		macro define keybinding_standard
+		end
+		
+		macro define keybinding_vi
+			status   "Mutt/Vi-like keybind by Osamu Aoki 2004 osamu@debian.org"
+			helptext "ESC| menu || |return| edit || |o| insert line || |s| save || |q| save&quit || |:| cmdline"
+			bind q   'context quitsave'
+			bind :   'commandline'
+			bind E   'context export'
+			bind L   'context import'
+			bind /   'macro m_search'
+			bind G   'context grab'
+			bind ..  'save_state'
+			bind  A  'action'
+			bind k   up
+			bind j   down
+			bind h   right
+			bind ..  left
+			bind ..  left
+			bind l   right
+			bind z   pagedown
+			bind Z   pageup
+			bind i   edit
+			bind a   edit
+			bind o   insert_below
+			bind ..  edit
+			bind O   up
+			bind ..  insert_below
+			bind ..  edit
+			bind T   toggle_todo
+			bind D   toggle_done
+			bind w   save
+			bind s   save
+			bind y   copy
+			bind d   save_state
+			bind ..  cut
+			bind p   paste
+			bind ..  down
+			bind S   save_state
+			bind ..  sort
+			bind H   "movenode left"
+			bind L   "movenode right"
+			bind K   "movenode up"
+			bind J   "movenode down"
+			bind u   restore_state
+			# Use "bind any ignore" instead to skip the warnings.
+			bind any unbound
+		end
+		
+		##### configuration macro (keybindings):
+		#
+		# To switch to the alternative keybindings enable
+		# "keybinding_vi" and disable "keybinding_standard".
+		#
+		macro keybinding_standard
+		#macro keybinding_vi
+		
 	context nodeedit
-		helptext "editing node |  |ESC| revert || |return| confirm"
+		helptext "editing node |  |ESC| revert || |return| confirm || |^S| split || |^J| join"
 		bind up    up
 		bind down  down
 		bind left  left
+		bind ^B    left
 		bind right right
+		bind ^F    right
 		
 		bind return  confirm
 		bind esc     cancel
@@ -279,7 +414,10 @@
 		bind ^E   eol
 		bind end  eol
 		
+		bind ^D   delete
 		bind del  delete
+		# bkill_word is currently not implemented.
+		bind ^W   bkill_word
 		
 	context lineedit
 		helptext lineedit
@@ -287,7 +425,9 @@
 		bind up      up
 		bind down    down
 		bind left    left
+		bind ^B      left
 		bind right   right
+		bind ^F      right
 		
 		bind return  confirm
 		bind esc     cancel
@@ -295,7 +435,10 @@
 		
 		bind backspace backspace
 		bind backspace2 backspace
+		bind ^D         delete
 		bind del        delete
+		# bkill_word is currently not implemented.
+		bind ^W   bkill_word
 		
 		bind ^A   bol
 		bind home bol
@@ -311,7 +454,8 @@
 		
 		bind any    cancel
 		
-	context quitsave
+	macro define 'quitsave_standard'
+		context quitsave
 		helptext "Save on exit? |    | Y |es | J |a || | N |o || |ESC| cancel"
 		bind Y  save
 		bind .. quit
@@ -331,6 +475,27 @@
 		bind esc "context main"
 		bind any unbound
 		
+		end
+		
+	macro define 'quitsave_alternate'
+		context quitsave
+		helptext "Save on exit? | |return| confirm || |x| exit without saving || |ESC| cancel"
+		bind return save
+		bind .. quit
+		bind x  quit
+		bind esc "context main"
+		bind any unbound
+		end
+		
+	##### configuration macro (quit/save dialog):
+	#
+	# To switch to the alternative save/quit dialog enable
+	# "quitsave_alternate" and disable "quitsave_standard".
+	#
+	macro quitsave_standard
+	#macro quitsave_alternate
+		
+	
 	context spellcheck
 		helptext "Spellchecking |   |Space| next node |ESC| cancel |F6,Return| confirm changes"
 		
@@ -456,6 +621,7 @@
 		bind N      'search -f "$query"'
 		
 		bind return "context main"
+		bind space "context main"
 		
 		bind esc    "context main"
 		bind ..     restore_state
@@ -509,13 +675,17 @@
 		bind esc 'context main'
 		bind any unbound
 		
-			
 	##### key related options
 		##### escdelay
-			# how long the program should wait before accepting that ESC(27d) is the
-			# ESC key and not the start of an escape sequence
-			# increase this number if you are using hnb over a slow network link
-			# value given is in ms (1/1000seconds)
+			#
+			# How long the program should wait before accepting
+			# that ESC(27d) is the ESC key and not the start of an
+			# escape sequence.
+			#
+			# Increase this number if you are using hnb over a slow
+			# network.
+			#
+			# Link value given is in ms (1/1000seconds).
 			#
 			escdelay 100
 ##### menu definition
@@ -529,7 +699,7 @@
 				go root
 				export_$format $db_file
 				restore_state
-			end
+				end
 		menu "File" "revert   " "revert"		
 		menu "File" "------------" ""
 		menu "File" "export    ^E" "context export"
@@ -543,7 +713,7 @@
 				status "file: \"$db_file\" format:$format"
 				mem
 				stats			
-			end
+				end
 		menu "File" "------------" ""
 		menu "File" "exit      ^Q" "context quitsave"
 	##### edit
@@ -554,19 +724,19 @@
 		menu "Edit" "---------" ""
 		menu "Edit" "Search ^F" "macro m_search"
 	##### entry
-		menu "Entry" "--------------" ""
-		menu "Entry" "edit    return" "edit"
-		menu "Entry" "delete     del" "remove"
-		menu "Entry" "--------------" ""
-		menu "Entry" "do action   ^A" "action"
-		menu "Entry" "indent      >" "indent"
-		menu "Entry" "outdent     <" "outdent"
-		menu "Entry" "toggle todo ^T" "toggle_todo"
-		menu "Entry" "toggle done ^D" "toggle_done"
-		menu "Entry" "expand           +" "expand"
-		menu "Entry" "expand subtree   ]" "expand --subtree"
-		menu "Entry" "collapse         -" "collapse"
-		menu "Entry" "collapse subtree [" "collapse --subtree"
+		menu "Entry" "-------------------" ""
+		menu "Entry" "edit         return" "edit"
+		menu "Entry" "delete          del" "remove"
+		menu "Entry" "-------------------" ""
+		menu "Entry" "do action        ^A" "action"
+		menu "Entry" "indent            >" "indent"
+		menu "Entry" "outdent           <" "outdent"
+		menu "Entry" "toggle todo      ^T" "toggle_todo"
+		menu "Entry" "toggle done      ^D" "toggle_done"
+		menu "Entry" "expand            +" "expand"
+		menu "Entry" "expand subtree    ]" "expand --subtree"
+		menu "Entry" "collapse          -" "collapse"
+		menu "Entry" "collapse subtree  [" "collapse --subtree"
 	##### level
 		menu "Level" "------------" ""
 		menu "Level" "sort      ^S" "sort -a"
@@ -578,6 +748,6 @@
 		status "hnb - hierarchical notebook   http://hnb.sourceforge.net/"
 		status "(c) Øyvind Kolås 2001-2003    pippin@users.sourceforge.net"
 		status "(this is lhnb, hnb's continuation by Tomas Janousek)"
-	end
+		end
 	
 	macro m_about
