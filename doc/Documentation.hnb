@@ -52,7 +52,6 @@
 			<node><data>hnb [options] [filename] [-e &quot;comand&quot; [&quot;command&quot; [&quot;command&quot; ..]]]</data></node>
 			<node><data>options:</data>
 				<node><data>-h or --help show recognized options</data></node>
-				<node><data></data></node>
 				<node><data>-a or --ascii use tab indented ASCII for loading/saving database</data>
 					<node><data>ASCII doesn&apos;t remember attributes like to-do status, done etc.</data></node>
 				</node>
@@ -61,10 +60,14 @@
 				<node><data>--hnb use hnb DTD for loading/saving database, this is the default unless you&apos;ve changed it in the preferences file</data></node>
 			</node>
 			<node><data>running commands</data>
-				<node><data>by running</data>
-					<node><data>hnb -e &quot;go_root&quot; &quot;oexport_htmlcss test.html&quot;</data></node>
-				</node>
-				<node><data>hnb will load the default database, go to the start of the database, and export it with the htmlcss filter to a file called test.html</data></node>
+				<node><data>By running</data></node>
+				<node><data>hnb -e &quot;go root&quot; &quot;export_htmlcss test.html&quot;</data></node>
+				<node><data>hnb will load the default database, go to the start of the database, and export it with the htmlcss filter to a file called test.html.</data></node>
+				<node><data>The HTML version of this documentation is generated through</data></node>
+				<node><data>hnb -rc /dev/null Documentation.hnb -e &quot;go root&quot; &quot;export_htmlcss Documentation.html&quot;</data></node>
+				<node><data>An example for exporting an hnb file to various output formats is the following</data></node>
+				<node><data>hnb file.hnb -e &quot;go root&quot; &quot;export_opml export.opml&quot; &quot;export_html export.html&quot; &quot;export_ascii export.txt&quot; &quot;export_htmlcss export_css.html&quot; &quot;export_ps export.ps&quot;</data></node>
+				<node><data>To get a list of all available commands type ? in command mode (per default mapped to F5).</data></node>
 			</node>
 		</node>
 		<node><data>In the latest version hnb also contains a menu that can be invoked by pressing ESC, more commands are available by invoking the commandline (F5).</data></node>
