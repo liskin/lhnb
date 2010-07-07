@@ -376,7 +376,7 @@ o)pen read_only\n\
 
 	{
 	    char swapfile[4096];
-	    sprintf(swapfile,"%s_hnb_rescue",prefs.db_file);
+	    sprintf(swapfile,"%s~",prefs.db_file);
 		if(!prefs.readonly)
 			    remove(swapfile);
     }
