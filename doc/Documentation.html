@@ -16,12 +16,12 @@ div {
 	padding-right: 2em;
 }
 div.level1 {
-	padding-top: 2.5em;
+	padding-top: 15em;
 	font-family: verdana, arial, helvetica, sans-serif; position:relative;
 	font-size:   18pt;
-	text-decoration: underline;
+	text-decoration: none;
 	font-weight: bold;
-	left:        0em;
+	left:        2em;
 	padding-right: 0em;
 }
 div.level2 {
@@ -39,9 +39,9 @@ div.level2 {
 
 <div class="level1">Introduction to hnb
 	<div class="level2">Introducing hnb
-		<div class="level3">hnb is an hierarchical notebook, that is an editor that focuses on editing and managing information in a hierarchical manner. This type of editor is also known as outline editors.</div>
+		<div class="level3">hnb is an hierarchical notebook, that is an editor that focuses on editing and managing information in a hierarchical manner. This type of editor is also known as an outline editor.</div>
 		<div class="level3">hnb was written as a personal itch of the author, he knew no other such program and thought out how he wanted it to work. Some of the additional features in hnb have been inspired by other similar programs.</div>
-		<div class="level3">I, that is &Oslash;yvind Kol&aring;s &lt;pippin@users.sourceforge.net&gt; use hnb to maintain my contact list, my to-do lists, my calendar, writing documentation and reports.</div>
+		<div class="level3">I the author, &Oslash;yvind Kol&aring;s &lt;pippin@users.sourceforge.net&gt; use hnb to maintain my contact list, my to-do lists, my calendar, writing documentation, reports, random ideas, and structuring various content.</div>
 	</div>
 	<div class="level2">Installing hnb
 		<div class="level3">Unix
@@ -79,7 +79,6 @@ div.level2 {
 			<div class="level4">hnb [options] [filename] [-e &#39;comand&#39; [&#39;command&#39; [&#39;command&#39; ..]]]</div>
 			<div class="level4">options:
 				<div class="level5">-h or --help show recognized options</div>
-				<div class="level5"></div>
 				<div class="level5">-a or --ascii use tab indented ASCII for loading/saving database
 					<div class="level6">ASCII doesn't remember attributes like to-do status, done etc.</div>
 				</div>
@@ -88,16 +87,20 @@ div.level2 {
 				<div class="level5">--hnb use hnb DTD for loading/saving database, this is the default unless you've changed it in the preferences file</div>
 			</div>
 			<div class="level4">running commands
-				<div class="level5">by running
-					<div class="level6">hnb -e &#39;go_root&#39; &#39;oexport_htmlcss test.html&#39;</div>
-				</div>
-				<div class="level5">hnb will load the default database, go to the start of the database, and export it with the htmlcss filter to a file called test.html</div>
+				<div class="level5">By running</div>
+				<div class="level5">hnb -e &#39;go root&#39; &#39;export_htmlcss test.html&#39;</div>
+				<div class="level5">hnb will load the default database, go to the start of the database, and export it with the htmlcss filter to a file called test.html.</div>
+				<div class="level5">The HTML version of this documentation is generated through</div>
+				<div class="level5">hnb -rc /dev/null Documentation.hnb -e &#39;go root&#39; &#39;export_htmlcss Documentation.html&#39;</div>
+				<div class="level5">An example for exporting an hnb file to various output formats is the following</div>
+				<div class="level5">hnb file.hnb -e &#39;go root&#39; &#39;export_opml export.opml&#39; &#39;export_html export.html&#39; &#39;export_ascii export.txt&#39; &#39;export_htmlcss export_css.html&#39; &#39;export_ps export.ps&#39;</div>
+				<div class="level5">To get a list of all available commands type ? in command mode (per default mapped to F5).</div>
 			</div>
 		</div>
-		<div class="level3">In the latest version hnb also contains a menu that can be invoked by pressing F9, for advanced commands the commandline (F5) is preferred.</div>
+		<div class="level3">In the latest version hnb also contains a menu that can be invoked by pressing ESC, more commands are available by invoking the commandline (F5).</div>
 	</div>
 	<div class="level2">Quitting hnb
-		<div class="level3">By pressing ESC, hnb will ask you whether you want to save or not, if you press ESC again hnb will return to normal operation.</div>
+		<div class="level3">By pressing ctrl+q, hnb will ask you whether you want to quit or save and quit, press ESC to cancel</div>
 	</div>
 	<div class="level2">Importing data
 		<div class="level3">To import the contents of another file, you press ^L (Ctrk+L), you will then get a list of choices of format to import from.</div>
@@ -178,7 +181,7 @@ div.level2 {
 		<div class="level3">^T toggles checkmarks instead of bullets,. ^D checks or unchecks the checkmarks.</div>
 		<div class="level3">percentages are shown for unchecked parents that have checked subentries</div>
 	</div>
-	<div class="level2">Using URL's
+	<div class="level2">Using URLs
 		<div class="level3">If an entry contains a web url ^A will bring up the configured web browser, (see your ~/.hnbrc for more information about configuration)</div>
 	</div>
 	<div class="level2">Calendars
@@ -306,8 +309,14 @@ div.level2 {
 				</div>
 			</div>
 			<div class="level4">show all of bottommost node when possible</div>
-			<div class="level4">menu</div>
+			<div class="level4">menu
+				<div class="level5">working</div>
+				<div class="level5">dynamic display of keybindings
+					<div class="level6">(unprobable)</div>
+				</div>
+			</div>
 			<div class="level4">add real percentages again,.. so I don't have to fake it like I did above on new documentation,..</div>
+			<div class="level4">autosave</div>
 		</div>
 	</div>
 	<div class="level2">school
@@ -350,7 +359,7 @@ div.level2 {
 			</div>
 		</div>
 	</div>
-	<div class="level2">quotations
+	<div class="level2">quotations 
 		<div class="level3">Peoples Front To Reunite Gondwanaland: &#39;Stop the Laurasian Separatist Movement!&#39; </div>
 		<div class="level3">slashdot 
 			<div class="level4">disbelief 
@@ -365,4 +374,6 @@ div.level2 {
 		<div class="level3">I keep a 'trashbin' where I stow away outdated entries,.. just to be able to search it,.. and save it later,..</div>
 	</div>
 </div>
+<div class="level1"></div>
+<div class="level1">If you are seeing this the first time running hnb, use your arrow keys to navigate this manual to familiarize yourself with hnb.</div>
 </body></html>
