@@ -13,8 +13,8 @@
 		#
 		# display_format:
 		#
-		# Defining how each node is displayed, the display string
-		# syntax is interpreted as follows:
+		#   Defining how each node is displayed, the display string
+		#   syntax is interpreted as follows:
 		#
 		#   - Spaces turn into real spaces, i means indentation, -
 		#     means bullet, d means the real data of the node, x is
@@ -56,6 +56,7 @@
 			#bullet_parent_expanded "  ·"
 			#bullet_leaf            "  -"
 			#bullet_leaf            "  *"
+		
 		macro define bullets_standard
 			
 			display_format "i4- d"
@@ -69,7 +70,7 @@
 			bullet_todo_leaf_done     "[X]"
 			
 			end
-			
+		
 		macro define bullets_alternate
 			
 			display_format "i2-d"
@@ -77,9 +78,9 @@
 			bullet_leaf               " -"
 			bullet_parent             " +"
 			bullet_parent_expanded    " *"
-			bullet_todo_parent_undone " !"
+			bullet_todo_parent_undone " _"
 			bullet_todo_parent_done   " X"
-			bullet_todo_leaf_undone   " !"
+			bullet_todo_leaf_undone   " _"
 			bullet_todo_leaf_done     " X"
 			
 			end
@@ -335,7 +336,7 @@
 		bind ^Z restore_state
 		
 		macro define keybinding_standard
-		end
+			end
 		
 		macro define keybinding_vi
 			status   "Mutt/Vi-like keybind by Osamu Aoki 2004 osamu@debian.org"
@@ -381,7 +382,7 @@
 			bind u   restore_state
 			# Use "bind any ignore" instead to skip the warnings.
 			bind any unbound
-		end
+			end
 		
 		##### configuration macro (keybindings):
 		#
@@ -615,10 +616,9 @@
 		helptext "Searching |  |ESC| cancel || | n |ext || | p |revious || |space|/|return| go"
 		bind down   'search -f "$query"'
 		bind up     'search -b "$query"'
-		bind P      'search -b "$query"'
 		bind p      'search -b "$query"'
 		bind n      'search -f "$query"'
-		bind N      'search -f "$query"'
+		bind N      'search -b "$query"'
 		
 		bind return "context main"
 		bind space "context main"

@@ -13,8 +13,8 @@
 		#\n\
 		# display_format:\n\
 		#\n\
-		# Defining how each node is displayed, the display string\n\
-		# syntax is interpreted as follows:\n\
+		#   Defining how each node is displayed, the display string\n\
+		#   syntax is interpreted as follows:\n\
 		#\n\
 		#   - Spaces turn into real spaces, i means indentation, -\n\
 		#     means bullet, d means the real data of the node, x is\n\
@@ -56,6 +56,7 @@
 			#bullet_parent_expanded \"  ·\"\n\
 			#bullet_leaf            \"  -\"\n\
 			#bullet_leaf            \"  *\"\n\
+		\n\
 		macro define bullets_standard\n\
 			\n\
 			display_format \"i4- d\"\n\
@@ -69,7 +70,7 @@
 			bullet_todo_leaf_done     \"[X]\"\n\
 			\n\
 			end\n\
-			\n\
+		\n\
 		macro define bullets_alternate\n\
 			\n\
 			display_format \"i2-d\"\n\
@@ -77,9 +78,9 @@
 			bullet_leaf               \" -\"\n\
 			bullet_parent             \" +\"\n\
 			bullet_parent_expanded    \" *\"\n\
-			bullet_todo_parent_undone \" !\"\n\
+			bullet_todo_parent_undone \" _\"\n\
 			bullet_todo_parent_done   \" X\"\n\
-			bullet_todo_leaf_undone   \" !\"\n\
+			bullet_todo_leaf_undone   \" _\"\n\
 			bullet_todo_leaf_done     \" X\"\n\
 			\n\
 			end\n\
@@ -335,7 +336,7 @@
 		bind ^Z restore_state\n\
 		\n\
 		macro define keybinding_standard\n\
-		end\n\
+			end\n\
 		\n\
 		macro define keybinding_vi\n\
 			status   \"Mutt/Vi-like keybind by Osamu Aoki 2004 osamu@debian.org\"\n\
@@ -381,7 +382,7 @@
 			bind u   restore_state\n\
 			# Use \"bind any ignore\" instead to skip the warnings.\n\
 			bind any unbound\n\
-		end\n\
+			end\n\
 		\n\
 		##### configuration macro (keybindings):\n\
 		#\n\
@@ -615,10 +616,9 @@
 		helptext \"Searching |  |ESC| cancel || | n |ext || | p |revious || |space|/|return| go\"\n\
 		bind down   'search -f \"$query\"'\n\
 		bind up     'search -b \"$query\"'\n\
-		bind P      'search -b \"$query\"'\n\
 		bind p      'search -b \"$query\"'\n\
 		bind n      'search -f \"$query\"'\n\
-		bind N      'search -f \"$query\"'\n\
+		bind N      'search -b \"$query\"'\n\
 		\n\
 		bind return \"context main\"\n\
 		bind space \"context main\"\n\
