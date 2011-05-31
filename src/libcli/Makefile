@@ -1,4 +1,4 @@
-CFLAGS = -Wall -Werror -g
+# CFLAGS = -Wall -Werror -g
 
 OBJS = cli.o cli_history.o cli_tokenize.o
 
