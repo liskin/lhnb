@@ -143,6 +143,8 @@ static void* ui_edit_cmd (int argc, char **argv, void *data)
 			case ui_action_confirm:
 				input[strlen (input) - 1] = 0;
 				node_set (pos, TEXT, input);
+				if (node_getflag (pos, F_temp))
+					node_setflag (pos, F_temp, 0);
 				stop = 1;
 				docmd(pos, "tree_changed");  
 				break;
