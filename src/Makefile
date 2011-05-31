@@ -1,4 +1,4 @@
-LIBS=-lncurses libcli/libcli.a
+LIBS=-lncursesw libcli/libcli.a
 CFLAGS ?= -Wall -Werror -g
 CPPFLAGS += -I.. -Ilibcli -DHAVE_CONFIG_H
 export CFLAGS
