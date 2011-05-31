@@ -1,6 +1,6 @@
 LIBS=-lncursesw libcli/libcli.a
 CFLAGS ?= -Wall -Werror -g
-CPPFLAGS += -I.. -Ilibcli -DHAVE_CONFIG_H
+CPPFLAGS += -I.. -Ilibcli -DHAVE_CONFIG_H -I/usr/include/ncursesw
 export CFLAGS
 
 CFILES=$(wildcard *.c)
