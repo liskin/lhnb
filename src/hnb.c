@@ -36,6 +36,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/stat.h>
+#include <locale.h>
 
 #include "tree.h"
 
@@ -179,6 +180,8 @@ int main (int argc, char **argv)
 	}
 
 	init_subsystems ();
+
+	setlocale(LC_ALL, "");
 
 	if (cmdline.usage) {
 		usage (argv[0]);
