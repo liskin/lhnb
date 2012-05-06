@@ -47,7 +47,7 @@ static void* export_help (int argc, char **argv, void *data)
 	Node *node = (Node *) data;
 	char *filename = argc==2?argv[1]:"";
 	Node *tnode;
-	int level, flags, startlevel, lastlevel, cnt;
+	int level, flags, startlevel, cnt;
 	char *cdata;
 	FILE *file;
 
@@ -60,7 +60,6 @@ static void* export_help (int argc, char **argv, void *data)
 	startlevel = nodes_left (node);
 
 	tnode = node;
-	lastlevel = 0;
 	fprintf (file,
 			 "#define i(a,b,c) do{Node *tnode=node_new();node_set(tnode,TEXT,b);node_setflags(tnode,c);import_node(&ist,a,tnode);}while(0)\n\n");
 	while ((tnode != 0) & (nodes_left (tnode) >= startlevel)) {
@@ -78,7 +77,6 @@ static void* export_help (int argc, char **argv, void *data)
 				 flags);
 
 		free(quoted);
-		lastlevel = level;
 		tnode = node_recurse (tnode);
 	}
 	level = 0;

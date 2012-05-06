@@ -57,7 +57,7 @@ static void* export_html (int argc, char **argv, void *data)
 	Node *node = (Node *) data;
 	char *filename = argc==2?argv[1]:"";
 	Node *tnode;
-	int level, flags, startlevel, lastlevel, cnt;
+	int level, startlevel, lastlevel, cnt;
 	char *cdata;
 	FILE *file;
 
@@ -83,7 +83,6 @@ static void* export_html (int argc, char **argv, void *data)
 <ul>\n");
 	while ((tnode != 0) & (nodes_left (tnode) >= startlevel)) {
 		level = nodes_left (tnode) - startlevel;
-		flags = node_getflags (tnode);
 		cdata = fixnullstring (node_get (tnode, TEXT));
 
 		if (level > lastlevel) {

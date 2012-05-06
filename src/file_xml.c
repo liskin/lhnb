@@ -76,7 +76,6 @@ static int findchar (char *haystack, char *needles)
 static void xml_export_nodes (FILE * file, Node *node, int level)
 {
 	char tag[bufsize];
-	int flags;
 	char *data;
 
 	static int no_quote = 0;
@@ -85,7 +84,6 @@ static void xml_export_nodes (FILE * file, Node *node, int level)
 		int data_start = 0;
 
 		tag[0] = 0;
-		flags = node_getflags (node);
 		data = fixnullstring (node_get (node, TEXT));
 
 		indent (level, "  ");
